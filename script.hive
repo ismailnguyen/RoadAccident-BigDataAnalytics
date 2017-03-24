@@ -1,0 +1,55 @@
+CREATE DATABASE IF NOT EXISTS accidents;
+
+USE accidents;
+
+CREATE EXTERNAL TABLE IF NOT EXISTS accidents_par_radars
+(latitude DOUBLE,
+longitude DOUBLE,
+date STRING,
+heure STRING,
+vehicule_primaire STRING,
+vehicule_secondaire STRING,
+latitude1 DOUBLE,
+longitude2 DOUBLE,
+vitesse_limit INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
+LOAD DATA INPATH 'project/accidents_par_radars' INTO TABLE accidents_par_radars;
+
+SELECT COUNT(1) 
+FROM accidents_par_radars;
+
+-- Accidents routier impliquants une moto (2012-2013)	
+SELECT COUNT(1) 
+FROM accidents_par_radars
+WHERE vehicule_primaire like '%Moto%' OR vehicule_secondaire like '%Moto%';
+
+-- Accidents routier impliquants un scooter (2012-2013)
+SELECT COUNT(1) 
+FROM accidents_par_radars
+WHERE vehicule_primaire like '%Scoo%' OR vehicule_secondaire like '%Scoo%';
+
+-- Accidents routier impliquants un poids lourd (2012-2013)
+SELECT COUNT(1) 		e
+FROM accidents_par_radars
+WHERE vehicule_primaire like '%VL%' OR vehicule_secondaire like '%VL%';
+
+-- Nombre d'accidents routier en 2012 à Paris
+SELECT COUNT(1)
+FROM accidents_par_radars
+WHERE SPLIT(date, '-')[0] like '2012';
+
+-- Nombre d'accidents routier en 2013 à Paris
+SELECT COUNT(1)
+FROM accidents_par_radars
+WHERE SPLIT(date, '-')[0] like '2013';
+
+-- Nombre d'accidents en été
+SELECT COUNT(1)
+FROM accidents_par_radars
+WHERE SPLIT(date, '-')[1] > 6 AND SPLIT(date, '-')[1] < 9;
+
+-- Nombre d'accidents en hiver
+SELECT COUNT(1)
+FROM accidents_par_radars
+WHERE SPLIT(date, '-')[1] > 10 OR SPLIT(date, '-')[1] < 3;
