@@ -18,7 +18,7 @@ Croiser les données avec la météo en fonction du lieu et de la date/heure
 Croiser les données avec la luminosité en fonction du lieu et de la date/heure
 
 
-##Cas d'usage :
+## Cas d'usage
 
 - Identifier un jeu de données (eg. Open Data)
 
@@ -27,7 +27,7 @@ Croiser les données avec la luminosité en fonction du lieu et de la date/heure
 - Faire ressortir des conclusions sur ces données
 
 
-##Exemple
+## Exemple
 
 Application téléphone qui indique pourcentage accident en fonction de la localisation et du type de véhicule
 si possible pourcentage vers les direction nord sud est ouest
